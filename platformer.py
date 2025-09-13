@@ -255,14 +255,17 @@ class SpriteActor(Actor):
             self.image = self._images[0]
 
     def next_image(self):
-        if self.image in self._images:
-            current = self._images.index(self.image)
-            if current == len(self._images) - 1:
-                self.image = self._images[0]
-            else:
-                self.image = self._images[current + 1]
-        else:
+        # Advance to next image safely, tolerating missing/empty lists
+        if not hasattr(self, '_images') or not isinstance(self._images, list) or len(self._images) == 0:
+            return
+        try:
+            current = self._images.index(self.image) if self.image in self._images else -1
+        except Exception:
+            current = -1
+        if current == -1 or current == len(self._images) - 1:
             self.image = self._images[0]
+        else:
+            self.image = self._images[current + 1]
 
     def animate(self):
         now = int(time.time() * self.fps)
