@@ -2,17 +2,19 @@ from pygame import Rect
 from pgzero.builtins import keys
 _buttons = {}
 
-def draw_menu(screen, WIDTH):
+def draw_menu(screen, WIDTH, music_on=True, sound_on=True):
     screen.blit("menu", (0, 0))
 
     button_w = 200
     button_h = 60
     button_gap = 30
-    top_margin = 40
+    bottom_margin = 40
     right_margin = 60
 
-    button_x = WIDTH - button_w - right_margin
-    button_start_y = top_margin
+    button_x = screen.width - button_w - right_margin
+    total_buttons = 4
+    total_height = total_buttons * button_h + (total_buttons - 1) * button_gap
+    button_start_y = screen.height - bottom_margin - total_height
     button_music_y = button_start_y + button_h + button_gap
     button_sound_y = button_music_y + button_h + button_gap
     button_exit_y = button_sound_y + button_h + button_gap
@@ -29,6 +31,11 @@ def draw_menu(screen, WIDTH):
     screen.draw.filled_rect(sound, "orange")
     screen.draw.filled_rect(exitb, "orange")
     screen.draw.text("QUIT", center=exitb.center, fontsize=40, color="black")
+    # Dynamic labels for music/sound
+    music_text = "Music: On" if music_on else "Music: Off"
+    sound_text = "Sound: On" if sound_on else "Sound: Off"
+    screen.draw.text(music_text, center=music.center, fontsize=32, color="black")
+    screen.draw.text(sound_text, center=sound.center, fontsize=32, color="black")
 
     global _buttons
     _buttons = {

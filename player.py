@@ -33,7 +33,7 @@ class Player(SpriteActor):
 
     def handle_input(self, keyboard):
         moved = False
-        if getattr(keyboard, 'LEFT') and self.midleft[0] > 0:
+        if getattr(keyboard, 'left') and self.midleft[0] > 0:
             self.x -= self.velocity_x
             self.sprite = self.walk_sprite
             self.flip_x = True
@@ -41,7 +41,7 @@ class Player(SpriteActor):
             obj = self._find_solid_platform()
             if obj is not None:
                 self.x = obj.x + (obj.width/2 + self.width/2)
-        elif getattr(keyboard, 'RIGHT') and self.midright[0] < self._world_w:
+        elif getattr(keyboard, 'right') and self.midright[0] < self._world_w:
             self.x += self.velocity_x
             self.sprite = self.walk_sprite
             self.flip_x = False

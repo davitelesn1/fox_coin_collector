@@ -321,12 +321,17 @@ class SpriteActor(Actor):
             # Choose frames based on flip_x; if no images_left, mirror at draw time
             using_left_list = self.flip_x and bool(self.sprite.images_left)
             base_images = self.sprite.images_left if using_left_list else self.sprite.images
-            if self.sprite.frame_num == 0:
-                self.sprite.i = (self.sprite.i + 1) % len(base_images)
-                self.sprite.frame_num = self.sprite.frames
+            # If paused, do NOT advance animation counters
+            if getattr(self, 'paused', False):
+                idx = self.sprite.i % len(base_images)
+                frame = base_images[idx]
             else:
-                self.sprite.frame_num -= 1
-            frame = base_images[self.sprite.i]
+                if self.sprite.frame_num == 0:
+                    self.sprite.i = (self.sprite.i + 1) % len(base_images)
+                    self.sprite.frame_num = self.sprite.frames
+                else:
+                    self.sprite.frame_num -= 1
+                frame = base_images[self.sprite.i]
             if self.flip_x and not using_left_list:
                 # Dynamically mirror the frame if no left-facing strip exists
                 try:

@@ -1,3 +1,6 @@
+_alpha_bbox_cache = {}
+
+
 def _pixel_is_opaque(rgb_or_rgba):
     try:
         if len(rgb_or_rgba) == 4:
@@ -59,7 +62,12 @@ def _pixel_perfect_collide(a, b, inset_getter):
 
         # Prefilter by alpha bounding boxes to avoid scanning transparent halos
         def alpha_bbox(surf):
+            # Tiny cache keyed by (id, size) to avoid recomputation within a frame
             sw, sh = surf.get_size()
+            key = (id(surf), sw, sh)
+            cached = _alpha_bbox_cache.get(key)
+            if cached is not None:
+                return cached
             minx, miny, maxx, maxy = sw, sh, -1, -1
             for yy in range(sh):
                 for xx in range(sw):
@@ -74,8 +82,11 @@ def _pixel_perfect_collide(a, b, inset_getter):
                         if yy > maxy:
                             maxy = yy
             if maxx == -1:
+                _alpha_bbox_cache[key] = None
                 return None
-            return (minx, miny, maxx + 1, maxy + 1)
+            bbox = (minx, miny, maxx + 1, maxy + 1)
+            _alpha_bbox_cache[key] = bbox
+            return bbox
 
         bb_a = alpha_bbox(sa)
         bb_b = alpha_bbox(sb)
@@ -135,3 +146,33 @@ def platform_collide(a, b):
     def small_inset(_):
         return (0, 0)
     return _pixel_perfect_collide(a, b, small_inset)
+
+
+# Convenience helpers for groups
+def first_hit_pixel(a, items):
+    """Return the first item from items that collides with a using pixel-perfect check, else None."""
+    for it in items:
+        if pixel_perfect_collide(a, it):
+            return it
+    return None
+
+
+def any_hit_pixel(a, items):
+    """Return True if any item collides with a using pixel-perfect check."""
+    return first_hit_pixel(a, items) is not None
+
+
+def first_hit_platform(a, platforms):
+    """Return the first platform that collides with a using platform_collide, else None."""
+    for p in platforms:
+        if platform_collide(a, p):
+            return p
+    return None
+
+
+def first_hit_aabb(a, items):
+    """Return the first AABB (colliderect) hit item, else None."""
+    for it in items:
+        if a.colliderect(it):
+            return it
+    return None
