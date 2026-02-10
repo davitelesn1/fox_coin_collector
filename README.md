@@ -2,9 +2,9 @@
 
 # 📱 Demo
 <p align="center">
-	<img src="assets/demo/demo.png" alt="Chat App preview" width="250"/>
-    <img src="assets/demo/demo2.png" alt="Chat App preview" width="250"/>
-    <img src="assets/demo/demo3.png" alt="Chat App preview" width="250"/>
+	<img src="images/demo.png" alt="Chat App preview" width="700"/>
+    <img src="images/demo2.png" alt="Chat App preview" width="700"/>
+    <img src="images/demo3.png" alt="Chat App preview" width="700"/>
 </p>
 
 Uma experiência de **jogo 2D simples e divertida** feita em **Python com pyzero**, onde o jogador controla uma raposa para coletar moedas enquanto supera obstáculos.
