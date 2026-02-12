@@ -7,36 +7,39 @@
     <img src="images/demo3.png" alt="Chat App preview" width="700"/>
 </p>
 
-Uma experiência de **jogo 2D simples e divertida** feita em **Python com pyzero**, onde o jogador controla uma raposa para coletar moedas enquanto supera obstáculos.
+A **simple and fun 2D game** experience made in **Python with pyzero**, where the player controls a fox to collect coins while overcoming obstacles.
 
-Este projeto faz parte da minha exploração em desenvolvimento de jogos com Python 🐍 e frameworks leves para jogos 2D, com foco em lógica de jogo, colisões, animações e eventos de player.
-
----
-
-## 🎮 Sobre o Jogo
-
-**Fox Coin Collector** é um jogo estilo plataforma no qual o jogador:
-
-- 💰 Coleta moedas espalhadas pelo mapa
-- 🦊 Controla uma raposa com teclas de movimento
-- ⚠️ Evita obstáculos e inimigos
-- 🎶 Tem trilha sonora e efeitos
-- 📊 Placar que aumenta conforme coleta moedas
-
-O jogo foi construído com base nos arquivos de nível, sprites e lógica distribuídos pela biblioteca `pyzero`.
+This project is part of my exploration of game development with Python 🐍 and lightweight frameworks for 2D games, focusing on game logic, collisions, animations, and player events.
 
 ---
 
-## 🧠 Tecnologias e Arquivos
+## 🎮 About the Game
 
-- **Python** – Linguagem principal
-- **pyzero** – Framework de desenvolvimento de jogos
+**Fox Coin Collector** is a platform-style game in which the player:
+
+- 💰 Collects coins scattered around the map
+- 🦊 Controls a fox with movement keys
+- ⚠️ Avoids obstacles and enemies
+- 🎶 Has a soundtrack and sound effects
+- 📊 Scoreboard that increases as coins are collected
+
+The game was built based on the level, sprite, and logic files distributed by the `pyzero` library.
+
+ ---
+
+## 🧠 Technologies and Files
+
+- **Python** – Main language
+- **pyzero** – Game development framework
 - Assets:
-  - `images/` – sprites e gráficos
-  - `sounds/` – música e efeitos
-  - `kenney_platformer-art-pixel-redux/` – gráficos de plataforma
 
-Arquivos principais:
+- `images/` – sprites and graphics
+
+- `sounds/` – music and effects
+
+- `kenney_platformer-art-pixel-redux/` – platform graphics
+
+Main files:
 📦 fox_coin_collector
  ```
 ┣ 📂 images
